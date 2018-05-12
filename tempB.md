@@ -274,7 +274,266 @@
 	
 	> Internet Engineering Task Force(互联网工程任务组, IETF):负责互联网标准的开发和推动。是全球互联网最具权威的技术标准化组织，当前绝大多数国际互联网技术标准出自IETF。IETF由互联网结构委员会（Internet Architecture Board, IAB）监督，IAB向互联网协会（Internet Society，ISOC）负责。
 
+
+------------------
 				
+	
+* ARPANet Evolves into Internet
+	+ First E-mail SPAM message: 1 May 1978 12:33 EDT
+	+ 80-83: TCP/IP, DNS; ARPANET and MILNET split
+	+ 85-86: NSF builds NSFNET as backbone, links 6 Supercomputer centers, 1.5 Mbps, 10,000 computers
+	
+	
+
+----------------
+
+* Communication Network: refers to the method that employees pass on information to other employees in an organization. Four different types: the wheel network, chain network, circle network, and all-channel network.
+
+
+![GUIs](images/01-031.png "GUIs")	
+
+---------------
+
+
+
+
+* What is a Communication Network? (End-system CEntric View)
+	+ Network offers one basiv service: move information
+		- Bird, fire, messenger, turck, telegraph, telephone, internet...
+		- Another example, transportation sevice: move objects (Horse, train, truck, airplane...)
+	+ What distinguish different types of networks?
+		- The sevices they provide
+	+ What distinguish the sevices?
+		- Latency (潜在因素)
+		- Bandwidth (Highest BW? "Sneakernet")
+		- Loss rate (损失率)
+		- Number of end systems (端系统)
+		- Servive interface (how to invoke the service?)
+		- Others (Reliability, unicast vs. multicast, real-time...)
+		
+	
+	
+* What is a Communication Network? (Infrastructure Centric View)
+	+ Communication medium: electron, photon
+	+ Network components:
+		- Links - carry bits from one place to another (or maybe multiple places): fiber, copper, satellite, ...
+		- Interface - attach devices to links
+		- Switches/routers - interconnect links: electronic/optic, crossbar/Banyan
+		- Hosts - communication endpoints: workstations, PDAs, cell phones, toasters
+	+ Protocols - rules governing communication between nodes
+		- TCP/IP, ATM, MPLS, SONET, Ethernet, X.25
+		
+
+	
+* Types of Networks
+	+ Geographical distance
+		- Local Area Networkss(LAN): Ethernet, Token ring, EDDI
+		- Metropolitan Area Networks (MAN): DQDB, SMDS
+		- WIde Areaa Networks(WAN): DQDB, SMDS
+		- Wide Area Networks(WAN): X.25, ATM, frame relay
+		- Caveat(附加说明、警告): LAN, MAN, WAN may mean different things (Service, network technology, networks)
+	
+![LAN](images/01-040.png "LAN")
+
+
+![ISP&NAP](images/01-041.png "ISP&NAP")	
+
+>> ISP(互联网服务提供商 Internet Service Provider)，即向广大用户综合提供互联网接入业务、信息业务、和增值业务的电信运营商。
+ 
+>> NAP是因特网的路由选择层次体系中的通信交换点。 每个网络接入点都由一个共享交换系统或者局域网组成，用来交换业务量。通达因特网主干线的点。ISP互相连接的点。NAP 可用作主要业务提供者的数据互换点。
+
+>> ICP(互联网内容提供商 Internet Content Provider），向广大用户综合提供互联网信息业务和增值业务的电信运营商。
+	
+------------	
+	
+> LAN(局域网 Local Area Network),is a computer network that interconnects computers within a limited area such as a residence, school, laboratory, university campus or office building.
+> 指在某一区域内由多台计算机互联成的计算机组。一般是方圆几千米以内。局域网可以实现文件管理、应用软件共享、打印机共享、工作组内的日程安排、电子邮件和传真通信服务等功能。局域网是封闭型的，可以由办公室内的两台计算机组成，也可以由一个公司内的上千台计算机组成
+![LAN](images/01-032.png "LAN")
+	
+> 具体到路由器，我们一般组网，都是组建的LAN网络，用户在局域网里通信、传输文件。其获取到的是内部IP，LAN 内部是交换机。我们可以不连接 WAN 口，把路由器当做普通交换机来使用, 一般用到的LAN的场景：
+
+>>1.接电脑的网线，需要插到路由器的LAN口
+
+>>2.二级路由，一般都是从上级路由的LAN口接线
+![LAN](images/01-033.png "LAN")
+	
+> 一般路由器的LAN口会图上颜色和WAN口区分，一般LAN口数目会多于LAN口。
+![LAN](images/01-034.png "LAN")
+	
+-----------------
+	
+> WAN(广域网 Wide Area Network ), not only covers a larger geographic distance, but also generally involves leased telecommunication circuits.(租用电信电路)
+> 是一种跨越大的、地域性的计算机网络的集合。通常跨越省、市，甚至一个国家。广域网包括大大小小不同的子网，子网可以是局域网，也可以是小型的广域网。
+![WAN](images/01-035.png "WAN")
+	
+> 接外部 IP 地址用，通常指的是出口，转发来自内部 LAN 接口的 IP 数据包。基本每个路由器都有WAN口，当然也有路由猫这种特例。WAN的应用场景：
+
+>> 1.从猫引出的来网线，要插到路由器的WAN口
+
+>> 2.二级路由，上级网线插到二级路由的WAN口	
+![WAN](images/01-036.png "WAN")
+
+> 一般路由器都会有一个WAN口，也有多个WAN口的路由。
+![WAN](images/01-037.png "WAN")
+	
+	
+-----------
+
+> WLAN(无线局域网 Wireless LAN), 和LAN不同，WLAN的数据通过电磁波传输，也就是常说的空气传输。WLAN 利用电磁波在空气中发送和接受数据，而无需线缆介质。
+> 使用 ISM (Industrial、Scientific、Medical) 无线电广播频段通信。WLAN 的 802.11a 标准使用 5 GHz 频段，支持的最大速度为 54 Mbps，而 802.11b 和 802.11g 标准使用 2.4 GHz 频段，分别支持最大 11 Mbps 和 54 Mbps 的速度。最新的11AC已经达到竟然的1.3Gbps。
+![WLAN](images/01-038.png "WLAN")
+
+> 由于WLAN采用全新的802.11协议，其设置要比普通的有限路由器复杂，好多朋友在配置无线网络的时候遇到问题。同时，WLAN没有硬件接口，支持WLAN的路由器，可以通过ISM定义的电磁波来彼此通信。
+
+-----------
+
+>> Summary: 
+
+>> WAN 口是对外的接口，和运营商、上级网络打交道。LAN 和W LAN 是对内的接口，内部的电脑、手机、PAD，都是接入到 LAN 或者 WLAN。一般的无线路由器，包含了完整的LAN、WAN、WLAN功能。
+![Summary](images/01-039.png "Summary")	
+
+----------
+
+> WAN(城域网 Metropolitan Area Network),是在一个城市范围内所建立的计算机通信网。在80年代末，在LAN的发展基础上提出的，在技术上与LAN有很多相似，而与广域网(WAN)区别较大。
+> WAN一个重要用途是用作骨干网，通过它将位于同一城市内不同地点的主机、数据库，以及LAN等互联网连接起来，这与WAN的作用有相似之处，但两者在实现方法与性能上有很大差别。WAN不仅用于计算机通信，同时可用于传输话音、图像等信息，成为一种综合利用的通信网，但属于计算机通信网的范畴，不同于综合业务通信网(ISDN)。	
+	
+	
+------------
+	
+* The Morris Internet Worm (1988)
+![The Morris Internet Worm](images/01-042.png "The Morris Internet Worm")	
+	
+	
+* LoveLetter Virus
+![LoveLetter Virus](images/01-043.png "LoveLetter Virus")	
+	
+
+---------------
+	
+##### Phase 5 (1995 - ):	Mobile Systems
+
+![Mobile](images/01-044.png "Mobile")
+
+![SSIS](images/01-045.png "Societal Scale Information System")
+
+![DataCenter](images/01-046.png "DataCenter")
+
+* OS Concept & Feature
+![OS](images/01-047.png "OS")
+
+
+
+---------------
+
+### Summary: History of OS
+
+* Change is continuous and OSs should adapt
+	+ Not: look how stupid batch processing was
+	+ But: made sense at the time
+* Situation today is much like the late 60s
+	+ Small OS: 100K lines
+	+ Large OS： 10M lines(5M for the browser!) -- (100-100 people-years)
+	
+* Complexity still reigns
+	+ NT developed (early to late 90's): Never worked well
+	+ Windows 2000/XP: Very successful
+	+ Windows Vista (aka "Longhorn") delayed many times
+		- Finnaly released in Jan 2007
+		- Promised by removing some of the intended technology
+		- Slow adoption rate, even in 2008/2009
+
+		
+-----------
+
+
+* OS __Components__ -- What are the pieces of the OS?
+	+ Process Management
+	+ Main-Memory Management
+	+ I/O System Management
+	
+
+
+* OS __Services__ -- What things does OS do?
+	+ Services that (more-or-less) map onto(映射到) components
+		+ Program excution
+			- How do you execute concurrent sequences of instructions?
+		+ I/O operations
+			- Standardized interfaces to extremely diverse devices
+		+ File system manipulation
+			- How do you read/write/preserve fiels?
+			- Looming concern(隐忧): How do you even find files?
+		+ Communications
+			- Networking protocols/Interface with CyberSpace?
+	+ Cross-cutting capabilities(横切能力)
+		- Error detection & recovery
+		- Resource allocation
+		- Accounting
+	
+	
+* OS __Structure__ -- What is the organizational Principle?
+
+1. Simple - Only one/two levels of code
+
+> Simple Structure
+![Simple](images/01-048.png "Simple")
+
+> UNIX: Also "Simple" Structure, UNIX -- limited by hardware functionality
+>> Original UNIX operating system consists of two separable parts:
+>>> 1. Systems programs
+>>> 2. The kernel 
+
+>>>> Consists of everything below the system-call interface and above the physical hardware
+
+>>>>  Provides the file system, CPU scheduling, memory management, and other operating-system functoins;
+ 
+>>>> Many interacting functions for one level
+
+>![UNIX](images/01-049.png "UNIX")
+	
+	
+	
+2. Layered - Lower levels independent of upper levels
+	+ OS id divided many layers(levels)
+		- Each built on top of lower layers
+		- Bottom layer (layer 0) is hardware
+		- Highest layer (layer N) is the user interface
+	+ Each layer uses functions(operations) and services of only lower-level layers
+		- Advantage: modularity --> Easier debugging/Maintenance
+		- Not always possible: Does process scheduler lie above or below virtual memory layer?
+			--> Need to reschedule processor while waiting or paging
+			--> May need to page in information about tasks
+
+
+	
+3. Microkernel - OS built from many user-level processes
+	+ Move as much form the kernel into "user" space 
+		- Small core OS running at kernel level
+		- OS Services built from many independent user-level processes
+	+ Communication between modules with message passing 
+	+ Benefits:
+		- Easier to extend a microkernel
+		- Easier to port OS to new architectures
+		- More reliable (less code is running in kernel mode)
+		- Fault Isolation (parts of kernel protected from other parts)
+		- More secure
+
+
+
+4. Modular
+		- Core kernel with Dynamically loadable modules
+	
+	
+	
+* Conclusion
+![Conclusion](images/01-050.png)
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
