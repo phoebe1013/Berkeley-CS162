@@ -32,9 +32,16 @@
 
 * Microkernel Structure -- (OS built from many user-level processes)
 
+	* Moves as much from the kernel into "user" space;
+	 
+	* Benefits;
+	
+	* Detriments(损害);
 
+![Microkernel](images/03-003.png "Microkernel")
 
-
+* Partition Based Structure for Multicore chips?
+![Partition Based Structure](images/03-004.png "Partition Based Structure")
 
 
 
