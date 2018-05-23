@@ -1,83 +1,80 @@
+* What happens when thread blocks on I/O ?
 
-* Dispatch Loop
- 
-![Loop](images/04-006.png "Loop")
+> I/O represents a system call, it's a different one than yield. But basically that system call goes in to say the read system call which then does its reading and then calls run new thread and switch and essentially this looks the same as yield. Because we would then end up going to another thread now.
+> 
+> read is kind of implicitly switches to another thread. The read happens because over time the disk blocks come in eventually we end up back on the run cue and then we just return back out a read and we continue.
 
---> Way to exit the loop:	Turn it off, blue screen, etc.
-	
-	
-----------------	
-	
-* Running a thread
-	+ Consider first portion:		_RunThread()_
-	
-	* How do I run a thread?
-		+ Load its state (registers, PC, stack pointer) into CPU
-		+ Load environment (virtual memory space, etc)
-		+ Jump to the PC
+![thread block on I/O](images/04-013.png "thread block on I/O")
 
-	* How does the dispatcher get control back? (调度器如何取回控制权）
-		+ **Internal events**: thread returns control voluntarily
-		+ **External events**: thread gets preempted
-	
-	
-	
-* Internal Events
-	+ Blocking on I/O
-		- The act of requesting I/O implicitly yields the CPU
+---------------
+
+* External Events
+
+	+ What happens if thread never does any I/O, never waits, and never yields control?
+		- COuld the ComputePI program grab all resources and never release the processor?
+		- Must find way that dispatcher can regain control!
 		
-	+ Waiting on a "signal" from other thread
-		- Thread asks to wait and thus yields the CPU
+	+ Answer: Utiliza External Events
+		- Interrupts: signals from hardware or software that stop the running code and jump to kernel
+		- Timer: like an alarm clock that goes off every some many milliseconds(毫秒)
+
+
+
+![Network Interrupt](images/04-014.png "Network Interrupt")
+
+> Interrupt Handler(中断处理器)
 	
-	+ Thread executes a _yield()_
-		- Thread volunteers to give up CPU
-		
-	![computePI](images/04-007.png "computePI")
+----------------
 	
-	
-* Stack for Yielding Thread
+* Use of Timer Interrupt(定时器中断) to Return Control
 
-> Blue: User Mode	
-> Red: Kernel Mode
+![Timer Interrupt](images/04-015.png "Timer Interrupt")
+> The only way we could get switched away is when the timer goes off, that's called preemption.(优先权)
 
-![yield](images/04-008.png "yield")
-
-
-* How do we run a new thread?
-	> run_new_thread() {
-		newThread; switch; ThreadHouseKeeping;	}
-
-* How does dispatcher switch to a new thread?
-	+ Save anything next thread may trash: PC, regs, stack
-	+ Maintain isolation for each thread
-	
--------------
-
-* What do the stacks look like?
-
-![stacks](images/04-009.png "stacks")
-	
-	
-* Saving/Restoring state (often called "Context Switch)
-
-![ContextSwitch](images/04-010.png "ContextSwitch")
+* I/O interrupt: same as timer interrupt except that _DoHousekeeping()_ replaced by _ServiceIO()_
 
 --------------
 
-* Switch Details
+* Choosing a Thread to Run
 
-> Switch can vary a lot depending on the architecture, depends on the processor.
-
-![Switch Details](images/04-011.png "Switch Details")
-
-> nachos(烤干酪辣味玉米片，墨西哥)
-> 
-> Nachos操作系统 (Not Another Completely Heuristic Operating System)，是一个可修改和跟踪的操作系统教学软件。（Heuristic 启发式的）它给出了一个支持多线程和虚拟存储的操作系统骨架，可让学生在较短的时间内对操作系统中的基本原理和核心算法有一个全面和完整的了解。
-> 
-> Nachos的主体是用C++的一个子集来实现的。目前面向对象语言日渐流行，它能够清楚地描述操作系统各个部分的接口。Nachos没有用到面向对象语言的所有特征，如继承性、多态性等，所以它的代码就更容易阅读和理解。
-> 
-> Nachos共有五个功能模块，分别是机器模拟、线程管理、文件系统管理、用户程序和虚拟存储以及网络系统。
+	+ How does Dispatcher decide what to run?
 	
-![Switch Details](images/04-012.png "Switch Details")
+		- Zero ready threads - dispatcher loops
+			- Alternative is to create an "idle thread"
+			- Can put machine into low-power mode
+		- Exactly one ready thread - easy
+		- More than one ready thread: use scheduling priorities
 
+* Possible Prioroties:
+	+ LIFO(last in, first out)
+		- put ready threads on front of list, remove from front
+	+ Pick one at random
+	+ FIFO(first in, first out)
+		- put ready threads on back of list, pull them from front 
+		- This is fair and is waht Nachos does
+	+ Priority queue:
+		- 	Keep ready list sorted by TCV priority field
 
+--------------	
+
+#### Summary
+
+* The state of a thread is contained in the TCB
+	+ Registers, PC, stack pointer
+	+ States: New, Ready, Running, Waiting, Terminated
+
+* Multithreading provides simple illusion of multiple CPUs 
+	+ Switch registers and stack to dispatch new thread
+	+ Provide mechanism to ensure dispatcher regains control
+
+* Switch routine
+	+ Can be very expensive if many registers
+	+ Must be very carefully constructed!
+
+* Many scheduling options
+	+ Decision of which thread to run complex enough for complete lecture
+	
+--------------		
+	
+	
+	
