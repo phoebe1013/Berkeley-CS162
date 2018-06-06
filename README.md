@@ -13,6 +13,7 @@
 	2.
 	* Lecture 6, Synchronization
 	* Lecture 7, Mutual Exclusion, Semaphores, Monitors, and Condition Variables(条件变量)
+	* Lecture 8, Readers-Writers Language Support for Synchronization
 
 
 
