@@ -15,6 +15,7 @@
 	* Lecture 7, Mutual Exclusion, Semaphores, Monitors, and Condition Variables(条件变量)
 	* Lecture 8, Readers-Writers Language Support for Synchronization
 	* Lecture 9, Tips for Working in a Project Team/Cooperating Processes and Deadlock
+	* Lecture 10, Deadlock, Thread Scheduling
 
 
 
