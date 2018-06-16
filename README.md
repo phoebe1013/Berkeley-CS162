@@ -16,6 +16,8 @@
 	* Lecture 8, Readers-Writers Language Support for Synchronization
 	* Lecture 9, Tips for Working in a Project Team/Cooperating Processes and Deadlock
 	* Lecture 10, Deadlock(cont'd), Thread Scheduling
+	* Lecture 11, Thread Scheduling(con't), Protection: Address Spaces
+
 
 
 
